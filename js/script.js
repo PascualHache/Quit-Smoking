@@ -11,9 +11,10 @@ function iniciar(){
 }
 
 function mouseOver() {
-  console.log("mouseOver");
   if(clickedByUser==false){
     paintArr(getImgList(this.id),"orange");
+  } else{
+    paintArr(getImgList(this.id),"green");
   }
 }
 
@@ -29,33 +30,25 @@ function getPosition(nameID){
 
 function getImgList(currentPos){
   var imgArr = []
-  console.log(currentPos);
-  if (clickedByUser == false){
     for (var i = 0; i < getPosition(currentPos); i++) {
       imgArr.push("icon"+(i+1));
     }
-  }
   return imgArr;
 }
 
 function paintArr(aImages, cColor){
-  console.log(aImages);
   for (var i = 0; i < aImages.length; i++) {
     document.getElementById(aImages[i]).style.fill = cColor;
   }
 }
 
 function clickOnIcon(){
-  clickedByUser = true;
-  // if(clickedByUser){
+  clearIcons()
   paintArr(getImgList(this.id),"green");
-  // }
-  console.log("Clicked inside!");
 }
 
-function clickOffIcon(){
+function clearIcons(){
   paintArr(getImgList("icon5"),"#f7d674");
-  console.log("Clicked OUTTTTTTT!");
 }
 
 document.addEventListener("click", (evt) => {
@@ -68,19 +61,11 @@ document.addEventListener("click", (evt) => {
 
   do {
     if (targetElement == flyoutElement1 || targetElement == flyoutElement2 || targetElement == flyoutElement3 || targetElement == flyoutElement4 || targetElement == flyoutElement5) {
-      // This is a click inside. Do nothing, just return.
-      console.log("Helly chuby chubyyy");
-      console.log(targetElement);
-      console.log(flyoutElement1);
-      clickOnIcon();
+      clickedByUser = true;
       return;
     }
-    // Go up the DOM
     targetElement = targetElement.parentNode;
   } while (targetElement);
-
-  // This is a click outside.
-
   clickedByUser = false;
-  clickOffIcon();
+  clearIcons();
 });
