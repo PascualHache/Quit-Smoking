@@ -14,7 +14,7 @@ function mouseOver() {
   if(clickedByUser==false){
     paintArr(getImgList(this.id),"orange");
   } else{
-    paintArr(getImgList(this.id),"green");
+    // paintArr(getImgList(this.id),"green");
   }
 }
 
